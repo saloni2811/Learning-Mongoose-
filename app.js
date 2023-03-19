@@ -2,30 +2,25 @@ const mongoose = require("mongoose");
 
 mongoose.connect("mongodb://localhost:27017/fruitsDB" , {useNewUrlParser : true});
 
+const fruitSchema = new mongoose.Schema ({
+    name: String,
+    rating: Number,
+    review: String
+});
 
-const insertDocuments = function(db , callback){
-    const collection = db.collection("fruits");
-    collection.insertMany([
-        {name: "Apple",
-        score:8,
-        review:"Great Fruit"
-        },
-         {name: "Orange",
-        score:6,
-        review:"Kinda Sour"
-        }, 
-        {name: "Banana",
-        score:9,
-        review:"Great stuff"
-        }
-    ], function(err,result){
-        assert.equal(err , null);
-        assert.equal(3,result.result.n);
-        assert.equal(3,result.ops.length);
-        console.log("Inserted 3 documents into the server");
-        callback(result);
-    });
-}
+const Fruit = mongoose.model("Fruit" , fruitSchema);
+
+const fruit = new Fruit({
+    name : "Aplle",
+    rating : 7
+    review : "Pretty solid as a fruit"
+});
+
+fruit.save();
+
+
+
+        
 
 const findDocuments = function(db , callback){
     const collection = db.collection("fruits");
