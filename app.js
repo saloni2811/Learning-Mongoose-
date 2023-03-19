@@ -16,18 +16,19 @@ const fruit = new Fruit({
     review : "Pretty solid as a fruit"
 });
 
-fruit.save();
+//fruit.save();
 
-
+Fruit.find(function(err,fruits){
+    if (err){
+        console.log(err);
+    }
+    else{
+        console.log(fruts);
+        fruits,forEach(function(fruit){
+            console.log(fruits.name);
+        });
+    }
+});
 
         
 
-const findDocuments = function(db , callback){
-    const collection = db.collection("fruits");
-    collection.find({}).toArray(function(err,docs){
-        assert.equal(err,null);
-        console.log("Found the following records");
-        console.log(docs);
-        callback(docs);
-    });
-}
